@@ -47,7 +47,7 @@ namespace ConsoleApp1
         public bool Validate(Block b, int res)
         {
             int test = this.Mine(b);
-            Console.WriteLine(test);
+            
             return res == test;
         }
     }

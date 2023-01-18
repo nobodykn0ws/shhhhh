@@ -31,19 +31,18 @@ namespace ConsoleApp1
             string query = "update miner set btc = btc + :btc_t where idm = :idm_t";
             double a = random.NextDouble();
 
-            Console.WriteLine("Prvi");
             using (IDbConnection connection = ConnectionPooling.GetConnection())
             {
                 connection.Open();
                 //IDbTransaction transaction = connection.BeginTransaction(); // transaction start
-                Console.WriteLine("Otvorio");
+           
                 using (IDbCommand command = connection.CreateCommand())
                 {
                     command.CommandText = query;
                     ParameterUtil.AddParameter(command, "btc_t", DbType.Double);
                     ParameterUtil.AddParameter(command, "idm_t", DbType.String);
                     command.Prepare();
-                    Console.WriteLine("pripremio");
+               
                     ParameterUtil.SetParameterValue(command, "idm_t", idm);
                     ParameterUtil.SetParameterValue(command, "btc_t", a);
                     
@@ -53,7 +52,7 @@ namespace ConsoleApp1
                 }
 
 
-                //transaction.Commit();
+               
 
             }
             
@@ -250,8 +249,7 @@ namespace ConsoleApp1
                 Console.WriteLine("1-Pregled Stanja Walleta");
                 Console.WriteLine("2-Unos Podataka i majnovanje bloka");
                 Console.WriteLine("3-Validiranje Blokova");
-                Console.WriteLine("4-Brisanje Usera");
-                Console.WriteLine("5-Selekcija Usera");
+
                 Console.WriteLine("X-Izlazak iz programa");
 
                 t = Console.ReadLine();
@@ -267,12 +265,7 @@ namespace ConsoleApp1
                     case "3":
                         Validacija();
                         break;
-                    case "4":
-                        UserDelete();
-                        break;
-                    case "5":
-                        UserChange();
-                        break;
+          
 
                 }
             }
@@ -304,8 +297,8 @@ namespace ConsoleApp1
             int ret = startMiner.Mine(b);
             b.Number = ret;
 
-            Console.WriteLine(b.ID);
-            Console.WriteLine(ret);
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("Blok je uspesno majnovan");
             Console.WriteLine();
             b.valid = 0;
@@ -329,48 +322,22 @@ namespace ConsoleApp1
             {
                 if(b.valid == 0 && b.idm != startMiner.ID)
                 {
-                   Console.WriteLine(b.Number);
+                  
                     b.Number = startMiner.Mine(b);
                    if(startMiner.Validate(b, b.Number))
                     {
-                        Console.WriteLine("Uslo");
+                        
                         PosaljiBitcoin(b.idm);
-                        Console.WriteLine("BTC");
+                       
                         Commitaj();
                         b.valid = 1;
                         UpdateBlock(b.ID);
-                        Console.WriteLine("Update");
+                      
                         Commitaj();
                     }
                 }
             }
         }
-
-        public void UserDelete() 
-        {
-
-        }
-
-        public void UserChange() 
-        { 
-            Console.WriteLine("Unesite redni broj usera na kog zelite da se prebacite:");
-            Console.WriteLine();
-            int i = 0;
-            foreach(User u in users)
-            {
-                Console.WriteLine(i +"-" + u.username);
-                i++;
-            }
-            int idx = Int32.Parse(Console.ReadLine());
-
-            if(idx >= 0 && idx < users.Count)
-            {
-                Console.WriteLine("Prebaceni ste na usera: " + users[idx].username);
-                defaultUser = users[idx];
-            } else
-            {
-                Console.WriteLine("User sa tim rednim brojem ne postoji");
-            }
-        }
+  
     }
 }

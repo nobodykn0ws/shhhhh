@@ -111,3 +111,5 @@ C:\Users\nikol\Desktop\shhh\shhhhh\ConsoleApp1\bin\Debug\nunit.framework.dll
 C:\Users\nikol\Desktop\shhh\shhhhh\ConsoleApp1\bin\Debug\nunit.framework.pdb
 C:\Users\nikol\Desktop\shhh\shhhhh\ConsoleApp1\bin\Debug\nunit.framework.xml
 C:\Users\nikol\Desktop\shhh\shhhhh\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete
+C:\Users\nikol\Desktop\MOLIMTE RADI\shhhhh\obj\Debug\ConsoleApp1.exe
+C:\Users\nikol\Desktop\MOLIMTE RADI\shhhhh\obj\Debug\ConsoleApp1.pdb
